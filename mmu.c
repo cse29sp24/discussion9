@@ -1,3 +1,23 @@
+/**
+ * A simple demo program to show the address translation process for a
+ * 6-bit address in a 64-byte address space with page sizes of 16 bytes.
+ *
+ * The virtual address is divided as follows:
+ *
+ *  |-------|-------|-------|-------|-------|-------|
+ *  |  va5  |  va4  |  va3  |  va2  |  va1  |  va0  |
+ *  |-------|-------|-------|-------|-------|-------|
+ *  |<<--- VPN --->>|<<---------- OFFSET --------->>|
+ *
+ * The 2 leading bits are the virtual page number (VPN), which we use
+ * to look up the physical frame number (PFN) in the page table.
+ *
+ * The remaining 4 bits are used to address inside each page. Since
+ * one page is 16 bytes, we need 4 bits to address the page. (2^4 = 16).
+ *
+ * Author: Jerry Yu <jiy066@ucsd.edu>
+ */
+
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
