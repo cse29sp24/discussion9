@@ -66,15 +66,18 @@ int main()
     printf("decimal: %d\n", vaddr);
     printb("binary", vaddr, NBITS);
 
+    /* calculate the VPN and offset using bit masking and shifting */
     vpn = (vaddr & VPN_MASK) >> OFFSET_BITS;
     offset = vaddr & OFFSET_MASK;
+
+    /* look up the PFN in the page table */
     pfn = pagetable[vpn];
 
     printb("vpn", vpn, VPN_BITS);
     printb("offset", offset, OFFSET_BITS);
     printb("pfn", pfn, 2);
 
-    // create new address
+    /* form the translated address */
     phys_addr |= pfn << OFFSET_BITS;
     phys_addr |= offset;
 
